@@ -57,18 +57,57 @@ export default function HomePage() {
       {/* Header */}
       <div className="bg-primary text-primary-foreground px-4 py-6">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-2xl font-bold text-balance">Clipboard Serves</h1>
+          <h1 className="text-2xl font-bold text-balance">Clipboard Served</h1>
           <p className="text-primary-foreground/70 mt-2 text-pretty">
-            Select the position you're hiring for to browse qualified candidates
+            Browse illustrative candidate profiles to see how it works!
           </p>
         </div>
       </div>
 
       {/* Position Selection */}
-      <div className="px-4 py-8 md:py-12">
+      <div className="px-4 py-4 md:py-6">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 gap-6 md:gap-8 mb-8 md:mb-12 max-w-sm mx-auto">
-            {positions.map((position) => (
+            {positions.slice(0, 3).map((position) => (
+              <Card
+                key={position.id}
+                className="cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-gray-400 bg-white overflow-hidden w-full border border-transparent group"
+                onClick={() => setSelectedPosition(position.id)}
+              >
+                <div className="flex flex-row h-20 pl-4 group">
+                  <div className="w-2/5">
+                    <div className="w-full h-full rounded-lg overflow-hidden">
+                      <img
+                        src={position.image || "/placeholder.svg"}
+                        alt={position.title}
+                        className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                  </div>
+                  <div className="w-3/5 p-3 ml-2 flex flex-col justify-center">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{position.title}</h3>
+                    <p className="text-gray-600 text-sm">{position.description}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+
+            <div className="max-w-sm mx-auto text-center bg-yellow-50 border border-gray-200 rounded-lg p-4">
+              <p className="text-gray-700 text-sm leading-relaxed italic">
+                Interested? Submit{" "}
+                <a
+                  href="https://forms.gle/N9xS31Q3gxbPFToh7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sky-500 hover:text-sky-600 underline font-medium"
+                >
+                  this form
+                </a>{" "}
+                to see your matches. Email emily@clipboardworks.com with questions.
+              </p>
+            </div>
+
+            {positions.slice(3).map((position) => (
               <Card
                 key={position.id}
                 className="cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-gray-400 bg-white overflow-hidden w-full border border-transparent group"
